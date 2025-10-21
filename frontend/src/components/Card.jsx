@@ -1,19 +1,15 @@
-import React from 'react'
-import styles from './Card.module.css'
+import { Link } from "react-router";
 
 const Card = ({post}) => {
-  return (
-    <div className={styles.container}>
-        
-        <div className={styles.grid}>
-            <div className={styles.grid_child} style={{margin: '50px'}}>
-                <h1 style={{fontWeight:'bolder',marginBottom: '15px'}}>{post.title}</h1>
-                <p style={{marginBottom: '10px'}}>{post.body}</p>
-                <p>{post.author}</p>
+    return (
+        <Link to={`/posts/${post._id}`} className="cursor-pointer relative flex items-center justify-center text-sm text-white/80 rounded-lg shadow-sm max-w-80">
+            <div className="absolute bottom-2 flex items-center justify-around backdrop-blur-sm w-full max-w-72 rounded bg-white/10 border border-white/20 py-2">
+                <p className="text-center">{post.title}</p>
+                <button  type="button" className="cursor-pointer bg-black/50 rounded-full px-6 py-1.5">{post.author}</button>
             </div>
-        </div>
-    </div>
-  )
-}
+            <img className="rounded-md" src="https://images.unsplash.com/photo-1599669454699-248893623440?q=80&w=600&auto=format&fit=crop" alt="" />
+        </Link>
+    );
+};
 
 export default Card

@@ -1,6 +1,6 @@
 import React from "react";
 
-const NotFound = ({ message = "No posts found." }) => {
+const NotFound = ({ message = "No posts found. Please TRY later" }) => {
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-900 text-gray-100">
       <h1 className="text-6xl font-bold mb-4 animate-pulse">404</h1>

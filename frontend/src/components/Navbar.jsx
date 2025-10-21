@@ -1,87 +1,44 @@
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-  Link,
-  Input,
-  DropdownItem,
-  DropdownTrigger,
-  Dropdown,
-  DropdownMenu,
-  Avatar,
-} from "@heroui/react";
+import { useState } from "react"
+import { NavLink } from "react-router-dom"
+import { assets } from "../assets/assets"
 
+const Navbar = () => {
+    const [open, setOpen] = useState(false)
+    return (
+        <nav className=" sticky top-0 z-50 shadow-md flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-100 py-4 border-b border-gray-300 bg-gray-900 relative transition-all">
 
-export default function Nav() {
-  return (
-    <Navbar isBordered>
-      <NavbarContent justify="start">
-        <NavbarBrand className="mr-4">
-          <p className="hidden sm:block font-bold text-inherit">BLOG</p>
-        </NavbarBrand>
-        <NavbarContent className="hidden sm:flex gap-3">
-          <NavbarItem>
-            <Link color="foreground" href="#">
-              Features
-            </Link>
-          </NavbarItem>
-          <NavbarItem isActive>
-            <Link aria-current="page" color="secondary" href="#">
-              Customers
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link color="foreground" href="#">
-              Integrations
-            </Link>
-          </NavbarItem>
-        </NavbarContent>
-      </NavbarContent>
+            <NavLink to={'/'}>
+              <img className="w-25 h-15 md:w-30" src={assets.blogImg} alt="" />
+            </NavLink>
 
-      <NavbarContent as="div" className="items-center" justify="end">
-        <Input
-          classNames={{
-            base: "max-w-full sm:max-w-[10rem] h-10",
-            mainWrapper: "h-full",
-            input: "text-small",
-            inputWrapper:
-              "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
-          }}
-          placeholder="Type to search..."
-          size="sm"
-          startContent={"🔍"}
-          type="search"
-        />
-        <Dropdown placement="bottom-end">
-          <DropdownTrigger>
-            <Avatar
-              isBordered
-              as="button"
-              className="transition-transform"
-              color="secondary"
-              name="Jason Hughes"
-              size="sm"
-              src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-            />
-          </DropdownTrigger>
-          <DropdownMenu aria-label="Profile Actions" variant="flat">
-            <DropdownItem key="profile" className="h-14 gap-2">
-              <p className="font-semibold">Signed in as</p>
-              <p className="font-semibold">zoey@example.com</p>
-            </DropdownItem>
-            <DropdownItem key="settings">My Settings</DropdownItem>
-            <DropdownItem key="team_settings">Team Settings</DropdownItem>
-            <DropdownItem key="analytics">Analytics</DropdownItem>
-            <DropdownItem key="system">System</DropdownItem>
-            <DropdownItem key="configurations">Configurations</DropdownItem>
-            <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
-            <DropdownItem key="logout" color="danger">
-              Log Out
-            </DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
-      </NavbarContent>
-    </Navbar>
-  );
+            {/* Desktop Menu */}
+            <div className="hidden sm:flex items-center gap-8 text-white ">
+                <NavLink to={'/'}>Home</NavLink>
+                <NavLink  to={'/about'}>About Me</NavLink>
+                <NavLink to={'/create'} className="font-medium cursor-pointer px-8 py-2 bg-primary-dull/50 hover:bg-primary-dull transition text-white rounded-lg">Create POST</NavLink>
+            </div>
+
+            <button onClick={() => open ? setOpen(false) : setOpen(true)} aria-label="Menu" className="sm:hidden">
+                {/* Menu Icon SVG */}
+                <svg width="21" height="15" viewBox="0 0 21 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="21" height="1.5" rx=".75" fill="#426287" />
+                    <rect x="8" y="6" width="13" height="1.5" rx=".75" fill="#426287" />
+                    <rect x="6" y="13" width="15" height="1.5" rx=".75" fill="#426287" />
+                </svg>
+            </button>
+
+            {/* Mobile Menu */}
+            <div className={`${open ? 'flex' : 'hidden'} absolute top-[60px] left-0 w-full bg-white shadow-md py-4 flex-col items-start gap-2 px-5 text-sm md:hidden`}>
+                <a href="#" className="block">Home</a>
+                <a href="#" className="block">About</a>
+                <a href="#" className="block">Contact</a>
+                <button className="cursor-pointer px-6 py-2 mt-2 bg-primary hover:bg-primary-dull transition text-white rounded-full text-sm">
+                    Login
+                </button>
+            </div>
+
+        </nav>
+    )
 }
+
+export default Navbar
